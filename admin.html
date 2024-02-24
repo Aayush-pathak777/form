@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    
+  </head>
+  <body>
+    <nav class="navbar  navbar-expand-lg  bg-primary" data-bs-theme="dark">
+      <!-- Navbar content -->
+
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+          <div class="navbar-nav w-100">
+            <a class="nav-link active" aria-current="page" href="/login.html">Login</a>
+            <a class="nav-link active" aria-current="page" href="/auth/signup.html">Sign-up</a>
+            <a class="nav-link" href="/index.html">Add User</a>
+            <a class="nav-link" href="/data/admin.html">Table</a>
+          
+          </div>
+
+
+          <form class="d-flex  float-end" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+          <button class="btn btn-outline-danger" type="submit" id="logout">Logout</button>
+
+        </div>
+      </div>
+    </nav>
+
+    <h1>All Data</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">S.NO</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Mode</th>
+          <th scope="col">Service</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider" id="t_data">
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/index.html"><button>Home</button></a>
+
+    <!-- Button trigger modal -->
+    <button
+      hidden
+      type="button"
+      class="btn btn-primary"
+      id="hidden_btn"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Launch static backdrop modal
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Modal title
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form id="form">
+            <div class="modal-body">
+              <!-- form  for edit  -->
+
+              <div class="username">
+                <label for="username">Name</label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="username"
+                  id="username"
+                />
+              </div>
+              <div class="Email">
+                <label for="email">email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="email id"
+                />
+              </div>
+              <div class="mobilenumber">
+                <label for="mobile">Number</label>
+                <input
+                  type="number"
+                  name="number"
+                  id="mobile"
+                  placeholder="Mobile No"
+                />
+              </div>
+              <div class="Address">
+                <label for="address">Address</label>
+                <textarea
+                  name="Address"
+                  id="address"
+                  cols="30"
+                  rows="10"
+                  placeholder="Address"
+                ></textarea>
+              </div>
+              <div class="Gender">
+                <label for="gender">Gender</label>
+                <select name="Gender" id="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Custom">Custom</option>
+                </select>
+              </div>
+              <div class="service">
+                <label for="service">service</label>
+                <input type="text" id="service" placeholder="service" />
+              </div>
+              <div class="mode">
+                <label for="mode">Mode</label>
+                <select name="mode" id="mode">
+                  <option value="Expece">expence</option>
+                  <option value="income">Income</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                id="handleSubmitBtn"
+                class="btn btn-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      (function(){
+        let isauth = localStorage.getItem('token')
+        if(isauth.length>0)
+        {
+console.log('ok')
+        }
+        else {
+          window.location.href ="/login.html"
+        }
+      })()
+      // let t_data  = document.getElementById("t_data");
+
+      let data = JSON.parse(localStorage.getItem("data")) || [];
+
+      // 
+
+      let to_be_edit_id = -1
+
+      document.addEventListener("DOMContentLoaded", function () {
+        displayInTable(data, "t_data");
+      });
+
+      function displayInTable(data, table) {
+        let place = document.getElementById(`${table}`);
+
+        place.innerHTML = ""; // empty kr rhe hai pervios data ko
+
+        if (!data.length) {
+          place.innerHTML = `<h1>No Data</h1>`;
+        } else {
+          data.forEach((el, ind) => {
+            let row = document.createElement("tr");
+
+            let sNo = document.createElement("th");
+
+            sNo.textContent = `${ind + 1}`;
+
+            let name = document.createElement("td");
+
+            name.textContent = el.username;
+            let email = document.createElement("td");
+
+            email.textContent = el.email;
+            let mobile = document.createElement("td");
+
+            mobile.textContent = el.mobile;
+            let mode = document.createElement("td");
+
+            mode.textContent = el.mode;
+            let service = document.createElement("td");
+
+            service.textContent = el.service;
+            let action = document.createElement("td");
+
+            // createing the btns
+
+            let edit = document.createElement("button");
+
+            edit.innerText = "edit";
+            edit.classList.add(
+              "m-1",
+              "p-1",
+              "bg-primary",
+              "text-white",
+              "rounded-pill",
+              "text-uppercase"
+            );
+
+            edit.addEventListener("click", function () {
+            
+              console.log("edit");
+
+              to_be_edit_id = el.id
+
+              let form = document.getElementById("form");
+
+              clearForm();
+
+              form.username.value = el.username;
+
+              form.email.value = el.email;
+              form.mobile.value = el.mobile;
+              form.address.value = el.address;
+              form.gender.value = el.gender;
+              form.service.value = el.service;
+              form.mode.value = el.mode;
+
+            
+              document.querySelector("#hidden_btn").click();
+            });
+
+            let del = document.createElement("button");
+            del.classList.add(
+              "m-1",
+              "p-1",
+              "bg-danger",
+              "text-white",
+              "rounded-pill",
+              "text-uppercase"
+            );
+            del.innerText = "delete";
+
+            del.addEventListener("click", function () {
+              alert(`${el.id}`);
+
+              deleteItm(el.id);
+            });
+
+            let view = document.createElement("button");
+            view.classList.add(
+              "m-1",
+              "p-1",
+              "bg-success",
+              "text-white",
+              "rounded-pill",
+              "text-uppercase"
+            );
+            view.innerText = "view";
+
+            view.addEventListener("click", function () {
+              console.log(data[0]);
+            });
+
+            action.append(edit, del, view);
+
+            row.append(sNo, name, email, mobile, mode, service, action);
+
+            place.append(row);
+          });
+        }
+      }
+
+      function deleteItm(id) {
+        // edge case checking if data is not there
+        if (!data.length) {
+          return;
+        } else {
+          // delete logic
+          let newData = data.filter((el, ind) => {
+            if (el.id === id) {
+            } else {
+              return el;
+            }
+          });
+
+          console.log(newData);
+
+          localStorage.setItem("data", JSON.stringify(newData)); // saving filtered data to local
+
+          window.location.reload(); // page reload
+        }
+      }
+
+      function clearForm() {
+        let form = document.getElementById("form");
+
+        form.username.value = "";
+
+        form.email.value = "";
+        form.mobile.value = "";
+        form.address.value = "";
+        form.gender.value = "";
+        form.service.value = "";
+        form.mode.value = "";
+      }
+
+      // form.addEventListener("submit", function (e) {
+
+
+        let btn = document.getElementById("handleSubmitBtn");
+
+btn.addEventListener("click", function () {
+  handleSubmit();
+});
+
+
+      function handleSubmit() {
+       
+
+        // console.log(  to_be_edit_id);
+
+
+
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let mobile = document.getElementById("mobile").value;
+        let address = document.getElementById("address").value;
+        let gender = document.getElementById("gender").value;
+        let service = document.getElementById("service").value;
+        let mode = document.getElementById("mode").value;
+
+        let newData = data.map((ele, index) => {
+          if (ele.id === to_be_edit_id) {
+            // first find and modifies
+
+            ele = {
+              ...ele,
+              username,
+              email,
+              mobile,
+              address,
+              gender,
+              service,
+              mode,
+            };
+          }
+
+          return ele;
+        });
+
+      
+
+        localStorage.setItem("data", JSON.stringify(newData)); // saving filtered data to local
+
+        // console.log(newData, to_be_edit_id);
+        window.location.reload();
+
+
+      }
+ let logout_btn=document.getElementById('logout')
+ logout_btn.addEventListener('click',function(){
+
+  console.log('chala ja')
+      localStorage.setItem("token","");
+
+      window.location.reload()
+
+
+
+ })
+
+      
+    </script>
+  </body>
+</html>

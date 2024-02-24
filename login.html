@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creative Login page</title>
+  </head>
+  <link rel="stylesheet" href="./project_2/index.css" />
+  <body>
+    <nav>
+      <div class="logo">its me</div>
+      <div class="links">
+        <a href="/index.html">add user</a>
+        <a href="/data/admin.html">Table</a>
+      </div>
+
+      <div class="id" id="id"></div>
+
+      <div class="clock" id="time">HH:MM:SS</div>
+    </nav>
+    <div class="wrapper">
+      <div class="login-box">
+        <form id="from">
+          <h2>Login</h2>
+
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="mail"></ion-icon>
+            </span>
+            <input type="email" required id="email" />
+            <label>Email</label>
+          </div>
+
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="lock-closed"></ion-icon>
+            </span>
+            <input type="password" required id="password" />
+            <label>Password</label>
+          </div>
+
+          <div class="remember-forgot">
+            <label><input type="checkbox" /> Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" id="button">Login</button>
+
+          <div class="register-link">
+            <p>
+              Don't have an account? <a href="../auth/signup.html">Register</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+    <script>
+      (function () {
+        checkLogin();
+      })();
+
+      // time start
+
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("hello");
+
+        setInterval(() => {
+          setTime();
+        }, 1000);
+      });
+
+      function setTime() {
+        let time = document.getElementById("time");
+
+        let hh = new Date().getHours();
+        let mm = new Date().getMinutes();
+        let ss = new Date().getSeconds();
+
+        time.innerText = `${hh}:${mm}:${ss}`;
+      }
+
+      // time end
+      let email = document.getElementById("email");
+
+      let password = document.getElementById("password");
+
+      let from = document.getElementById("from");
+
+      from.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let obj = {
+          email: email.value,
+          password: password.value,
+        };
+
+        let data = JSON.parse(localStorage.getItem("users"));
+
+        console.log(data);
+
+        let found = false;
+
+        data.forEach((el, ind) => {
+          if (el.email === obj.email && el.password === obj.password) {
+            found = true;
+          }
+        });
+
+        if (found) {
+          localStorage.setItem("token", `${obj.email}`);
+
+          alert("Your are log in");
+        } else {
+          localStorage.setItem("token", "logge out");
+        }
+
+        window.location.reload();
+      });
+
+      function checkLogin() {
+        let show = JSON.stringify(localStorage.getItem("token"));
+
+        if (show) {
+          let id = document.getElementById("id");
+          console.log(show);
+          id.innerHTML = show.slice(1, 6);
+        } else {
+          id.innerHTML = `No data`;
+        }
+      }
+    </script>
+  </body>
+</html>
